@@ -1,4 +1,4 @@
-package com.github.chiarelli.apiclientes;
+package com.github.chiarelli.apiclientes.controllers;
 
 import java.util.UUID;
 
@@ -49,16 +49,10 @@ public class ClientesController {
        @RequestParam(defaultValue = "nome") String sort
 	) {
         var pageResponse = clientesService.consultar(page, size, sort);
-        var clientes = pageResponse.getContent();
-
-        return new PageCollectionJsonResponse<>(
-            clientes.size(),
-            page,
-            size,
-            pageResponse.getTotalElements(),
-            pageResponse.getTotalPages(),
-            clientes
-        );
+        var resp = new PageCollectionJsonResponse<>(pageResponse);
+        System.out.println("page: " + page + " size: " + size + " sort: " + sort);
+            resp.setCurrentPage(page);
+        return resp;
     }
 
     // READ - Buscar um cliente por ID
