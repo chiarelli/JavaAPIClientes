@@ -1,9 +1,12 @@
 package com.github.chiarelli.apiclientes.dtos;
 
+import java.time.LocalDate;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
@@ -23,10 +26,7 @@ public class ClienteRequest {
 	private String endereco;
 	
 	@NotNull(message = "Data de nascimento é obrigatória.")
-	@Pattern(
-	  regexp = "^\\d{4}-\\d{2}-\\d{4}$",
-	  message = "A data de nascimento deve estar no formato yyyy-MM-dd"
-	)
-	private String dataNascimento;
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	private LocalDate dataNascimento;
 	
 }
